@@ -1,4 +1,4 @@
-/**
+/*
  * V. Hunter Adams (vha3@cornell.edu)
  * vanhunteradams.com
  * June, 2024
@@ -7,7 +7,6 @@
  * Demonstration of a custom GATT service. Connect to Pico server
  * using LightBlue or a similar app.
  */
-
 
 // Standard libraries
 #include <stdio.h>
@@ -34,9 +33,10 @@
 #include "GATT_Service/service_implementation.h"
 
 #define LED_PIN 25
+static uint16_t emg_value = 0;
 
-// BTstack objects
-static btstack_timer_source_t heartbeat;
+//BTstack objects
+static btstack_data_source_t emg_characteristic;
 static btstack_packet_callback_registration_t hci_event_callback_registration;
 
 // Some data that we will communicate over Bluetooth
@@ -105,17 +105,13 @@ int main() {
     gpio_init(LED_PIN);
     // Configure the LED pin as an output
     gpio_set_dir(LED_PIN, GPIO_OUT);
-    // Loop
-    while (true) {
-        // Set high
-        gpio_put(LED_PIN, 1);
-        // Sleep
-        sleep_ms(250);
-        // Set low
-        gpio_put(LED_PIN, 0);
-        // Sleep
-        sleep_ms(250);
-    }
+    // Set high
+    gpio_put(LED_PIN, 1);
+    // Sleep
+    sleep_ms(1000);
+    // Set low
+    gpio_put(LED_PIN, 0);
+    
 
     // initialize CYW43 driver architecture (will enable BT if/because CYW43_ENABLE_BLUETOOTH == 1)
     if (cyw43_arch_init()) {
