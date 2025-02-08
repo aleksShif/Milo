@@ -6,7 +6,7 @@ from flask import Flask, request, render_template, send_from_directory, jsonify
 from flask_cors import CORS
 from db import * 
 
-app = Flask(__name__, static_folder="../frontend-milo/dist", static_url_path="/")
+app = Flask(__name__, static_folder="../frontend-milo", static_url_path="/")
 app.secret_key = b'5015fbe01ff54e249e7416f4feb0cf9d'
 
 cors = CORS(app, origins='*') 
