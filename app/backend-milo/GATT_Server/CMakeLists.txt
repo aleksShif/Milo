@@ -58,6 +58,7 @@ target_link_libraries(GATT_Server
     hardware_sync
     hardware_pio
     hardware_dma
+    hardware_adc
     )
 target_include_directories(GATT_Server PRIVATE
     ${CMAKE_CURRENT_LIST_DIR} # For btstack config

@@ -1,4 +1,10 @@
 /*
+ * UPDATED CODE WRITTEN BY:
+ * Asma Ansari (ara89@cornell.edu)
+ * 
+ * Added functionality for reading an EMG sensor's data 
+ * 
+ * BASE CODE TAKEN FROM:
  * V. Hunter Adams (vha3@cornell.edu)
  * vanhunteradams.com
  * June, 2024
@@ -63,6 +69,7 @@ uint16_t read_emg_data() {
     return adc_read();  // Returns a 12-bit value (0–4095)
 }
 
+
 // EMG protothread
 static PT_THREAD (protothread_emg(struct pt *pt))
 {
@@ -71,6 +78,12 @@ static PT_THREAD (protothread_emg(struct pt *pt))
     while(1) {
         // Read EMG data
         emg_value = read_emg_data();
+
+        // Convert EMG value to string
+        sprintf(emg_str, "%d", emg_value);
+        
+        // Send via characteristic C
+        set_characteristic_c_value(emg_str);
 
         // Notify connected devices
         att_server_notify(emg_characteristic.handle, (uint8_t *)&emg_value, sizeof(emg_value));
