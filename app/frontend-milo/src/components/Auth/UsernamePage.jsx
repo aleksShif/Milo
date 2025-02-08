@@ -1,6 +1,7 @@
-const API_URL = "http://localhost:5000";
+
 
 import React, { useState } from 'react';
+
 import { useNavigate } from 'react-router-dom';
 import { Home, Activity, Calendar, Dumbbell } from 'lucide-react';
 
@@ -10,31 +11,12 @@ const UsernamePage = () => {
   const [activeTab, setActiveTab] = useState('home');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    
-    try {
-      const endpoint = isLogin ? '/login' : '/register'; 
-      const response = await fetch(`${API_URL}/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username }),
-      });
-      
-      if (response.ok) {
-        navigate('/loginpass', {state: { username } });
-      } else {
-        alert('Username not found. Please create an account');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-    } finally {
-      setLoading(false);
-    }
+    navigate('/home');
   };
+
+  
 
   return (
     <div className="flex flex-col h-screen bg-black text-white">
