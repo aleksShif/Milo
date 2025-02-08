@@ -12,6 +12,7 @@ app.secret_key = b'5015fbe01ff54e249e7416f4feb0cf9d'
 cors = CORS(app, origins='*') 
 
 create_table()
+add_user("sasha","s")
 
 # @app.route("/", methods=["GET"])
 # def home(): 
@@ -50,7 +51,8 @@ def login():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-@app.route("/home", methods=["GET"])
+
+@app.route("/home1", methods=["GET"])
 def home():
     return jsonify(
         {
@@ -61,6 +63,7 @@ def home():
             ]
         }
     )
+
 
 @app.route("/loginpass", methods=["POST"])
 def loginpass():

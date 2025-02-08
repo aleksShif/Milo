@@ -24,12 +24,11 @@ def create_table():
 def add_user(username, password):
     conn = get_db_connection()
     cursor = conn.cursor()
-    password_hash = generate_password_hash(password)
     cursor.execute(
         """
-        INSERT INTO users (username, password) VALUES (?, ?)
+        INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)
         """,
-        (username, password_hash)
+        (username, password)
     )
     conn.commit()
     conn.close()
@@ -59,5 +58,5 @@ def get_user(username, password):
     user = cursor.fetchone()
     conn.close()
 
-    if user and check_password_hash(user['password_hash'], password):
+    if user and password:
         return dict(user)
