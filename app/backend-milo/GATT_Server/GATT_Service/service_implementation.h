@@ -399,34 +399,23 @@ void set_characteristic_c_value(char * c_ptr) {
 
 }
 
+// Update Characteristic D value (ADC value)
+void set_characteristic_d_value(uint16_t adc_value) {
 
+    // Pointer to our service object
+    custom_service_t * instance = &service_object;
 
+    // Convert the ADC value to a string
+    char adc_value_str[32];
+    sprintf(adc_value_str, "%u", adc_value);  // Convert unsigned ADC value to string
 
+    // Update characteristic D value with the ADC string
+    instance->characteristic_d_value = adc_value_str;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // If client has enabled notifications, register a callback
+    if (instance->characteristic_d_client_configuration) {
+        instance->callback_d.callback = &characteristic_d_callback;
+        instance->callback_d.context = (void*) instance;
+        att_server_register_can_send_now_callback(&instance->callback_d, instance->con_handle);
+    }
+}
