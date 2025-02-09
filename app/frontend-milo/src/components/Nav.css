@@ -1,0 +1,14 @@
+body {
+  background-color: #1a1a1a; /* Dark gray background color */
+  color: white; /* Ensure text color is white for readability */
+}
+
+.hover-bar-button {
+    transition: all;
+  }
+  
+  .hover-bar-button:hover {
+    border-radius: 50%;
+    background-color: #F6339A; /* Lighter red color */
+    box-shadow: 0 0 10px rgba(244, 78, 150, 0.8); /* Glowing effect */
+  }

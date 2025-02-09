@@ -113,10 +113,22 @@ def activity():
         "activity": "This is the activity page."
     })
 
-if __name__ == "__main__":
-    app.run(debug=True)
-# @app.route('/api/v1/hello', methods=['GET'])
-
 @app.route('/session', methods=['GET'])
 def session():
     return jsonify({"status": "success", "message": "Session is active"})
+
+@app.route('/tracking', methods=['GET']) 
+def tracking():
+    return jsonify({"status": "success", "message": "Tracking is active"})
+
+@app.route('/workout', methods=['GET'])
+def workout():
+    return jsonify({"status": "success", "message": "Workout is active"})
+
+@app.route('/calendar', methods=['GET'])
+def calendar():
+    return jsonify({"status": "success", "message": "Calendar is active"})
+
+if __name__ == "__main__":
+    app.run(debug=True)
+# @app.route('/api/v1/hello', methods=['GET'])

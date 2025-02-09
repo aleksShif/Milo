@@ -1,11 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceArea } from 'recharts';
-import { Home, Activity, Calendar, User, Settings, Clock } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Home, Activity, Calendar, User, Settings, Clock, ChevronRight, Grid } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import Papa from 'papaparse';
+import '../Nav.css'; 
 
 const ActivityDashboard = () => {
     const [data, setData] = useState([]);
+
+    const navigate = useNavigate(); 
+    const goWorkout = (e) => {
+        e.preventDefault();
+        navigate('../workout');
+      };
+      const goHome = (e) => {
+        e.preventDefault();
+        navigate('/home');
+      };
+     
+      const goActivities = (e) => {
+        e.preventDefault();
+        navigate('/home/activity');
+      };
+    
+      const goCalendar = (e) => {
+        e.preventDefault();
+        navigate('/calendar');
+      };
 
     const [left, setLeft] = useState('dataMin');
     const [right, setRight] = useState('dataMax');
@@ -155,7 +176,7 @@ const ActivityDashboard = () => {
     };
 
     return (
-        <main className="flex flex-col h-screen bg-black text-white max-w-md mx-auto relative">
+        <main className="max-w-[390px] w-[390px] mx-auto bg-black text-white min-h-screen relative rounded-3xl">
             {/* Header */}
             <header className="flex justify-between items-center p-4">
                 <h1 className="text-xl">
@@ -303,27 +324,29 @@ const ActivityDashboard = () => {
             </div>
 
             {/* Bottom Navigation */}
-            <nav className="fixed bottom-0 w-full bg-[#121212] px-6 py-4 max-w-md">
-                <div className="flex justify-between items-center">
-                    <Link to="/" className="flex flex-col items-center">
-                        <div className="w-8 h-8 rounded-full bg-zinc-800 mb-1"></div>
-                        <span className="text-zinc-400 text-xs">Home</span>
-                    </Link>
-                    <Link to="/activity" className="flex flex-col items-center">
-                        <div className="w-8 h-8 rounded-full bg-[#00F7FF] mb-1"></div>
-                        <span className="text-[#00F7FF] text-xs">Activity</span>
-                    </Link>
-                    <Link to="/calendar" className="flex flex-col items-center">
-                        <div className="w-8 h-8 rounded-full bg-zinc-800 mb-1"></div>
-                        <span className="text-zinc-400 text-xs">Calendar</span>
-                    </Link>
-                    <Link to="/workouts" className="flex flex-col items-center">
-                        <div className="w-8 h-8 rounded-full bg-zinc-800 mb-1"></div>
-                        <span className="text-zinc-400 text-xs">Workouts</span>
-                    </Link>
-                </div>
-            </nav>
-        </main>
+            <div 
+        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[390px] 
+        bg-gray-900/90 backdrop-blur-md border-t border-gray-800 
+        flex justify-around items-center py-2 px-2 h-16 space-x-4"
+      >
+        <button onClick={goHome} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Home className="w-6 h-6" />
+          <span className="text-xs mt-1">Home</span>
+        </button>
+        <button onClick={goActivities} className="text-pink-500 flex flex-col items-center justify-center flex-1">
+          <Activity className="w-6 h-6" />
+          <span className="text-xs mt-1">Activity</span>
+        </button>
+        <button onClick={goCalendar} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Grid className="w-6 h-6" />
+          <span className="text-xs mt-1">Calendar</span>
+        </button>
+        <button onClick={goWorkout} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Settings className="w-6 h-6" />
+          <span className="text-xs mt-1">Workouts</span>
+        </button>
+      </div>
+        </main >
     );
 };
 

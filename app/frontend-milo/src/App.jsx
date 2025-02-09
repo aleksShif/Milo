@@ -9,8 +9,11 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import UsernamePage from './components/Auth/UsernamePage'
 import PasswordPage from './components/Auth/PasswordPage'
-import Home from './components/Home/Home';
+import HomePage from './components/Home/HomePage';
 import Session from './components/Home/Session';
+import Tracking from './components/Home/Tracking';
+import Workout from './components/Features/Workout';
+import Calendar from './components/Features/Calendar';
 
 import Activity from './components/Home/Activity';
 const App = () => {
@@ -18,8 +21,12 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/loginpass" element={<PasswordPage />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/home/Activity" element={<Activity />} />
+        <Route path="/session" element={<Session />} />
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/home/activity" element={<Activity />} />
+        <Route path='/tracking' element={<Tracking />} />
+        <Route path='/workout' element={<Workout />} />
+        <Route path='/calendar' element={<Calendar />} />
         <Route path="/" element={<UsernamePage/>} />
       </Routes>
     </Router>
