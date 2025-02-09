@@ -16,6 +16,7 @@ const PasswordPage = () => {
     }
   }, [username, navigate]);
 
+  /*
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -40,6 +41,7 @@ const PasswordPage = () => {
       setLoading(false);
     }
   };
+  */
 
   return (
     <div className="flex flex-col h-screen bg-black text-white">

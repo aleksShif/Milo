@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 import { useNavigate } from 'react-router-dom';
 import { Home, Activity, Calendar, Dumbbell } from 'lucide-react';
 
@@ -11,7 +12,12 @@ const UsernamePage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    navigate('/home');
+  };
+
+  
     navigate('/home');
   };
 

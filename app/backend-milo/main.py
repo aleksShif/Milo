@@ -51,7 +51,8 @@ def login():
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)}), 500
 
-@app.route("/home", methods=["GET"])
+
+@app.route("/home1", methods=["GET"])
 def home():
     return jsonify(
         {
@@ -62,6 +63,7 @@ def home():
             ]
         }
     )
+
 
 @app.route("/loginpass", methods=["POST"])
 def loginpass():
