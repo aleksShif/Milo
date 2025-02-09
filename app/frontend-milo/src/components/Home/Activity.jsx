@@ -41,7 +41,7 @@ const ActivityDashboard = () => {
     useEffect(() => {
         const parseCSV = async () => {
             try {
-                const response = await fetch('/activity-log-01-03-2025.csv');
+                const response = await fetch('/activity-log-01-01-2025.csv');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }

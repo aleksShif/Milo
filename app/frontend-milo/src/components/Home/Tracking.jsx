@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Heart, Star, Thermometer, Home, Activity, Calendar, User } from 'lucide-react';
 import WorkoutComplete from './WorkoutComplete';
 import './Tracking.css';
@@ -13,11 +14,12 @@ const MiloExerciseApp = () => {
     year: '2-digit'
   });
 
+  const navigate = useNavigate(); 
   const handleEndTracking = () => { 
     setShowWorkoutComplete(true);
   };
   const toggleRecording = () => {
-    setIsRecording(!isRecording);
+    navigate('/bicep')
   };
 
   return (

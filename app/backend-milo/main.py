@@ -129,6 +129,10 @@ def workout():
 def calendar():
     return jsonify({"status": "success", "message": "Calendar is active"})
 
+@app.route("/bic", methods=["GET"])
+def bic():
+    return jsonify({"status": "success", "message": "BIC is active"})
+
 if __name__ == "__main__":
     app.run(debug=True)
 # @app.route('/api/v1/hello', methods=['GET'])

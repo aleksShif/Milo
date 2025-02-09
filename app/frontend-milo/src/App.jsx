@@ -14,8 +14,8 @@ import Session from './components/Home/Session';
 import Tracking from './components/Home/Tracking';
 import Workout from './components/Features/Workout';
 import Calendar from './components/Features/Calendar';
-
 import Activity from './components/Home/Activity';
+import Bicep from './components/Features/Bicep';
 const App = () => {
   return (
     <Router>
@@ -25,6 +25,7 @@ const App = () => {
         <Route path="/home" element={<HomePage />} />
         <Route path="/home/activity" element={<Activity />} />
         <Route path='/tracking' element={<Tracking />} />
+        <Route path='/bicep' element={<Bicep />} />
         <Route path='/workout' element={<Workout />} />
         <Route path='/calendar' element={<Calendar />} />
         <Route path="/" element={<UsernamePage/>} />
