@@ -1,6 +1,6 @@
 import React from 'react'
 import { Settings, Clock, ChevronRight } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 
 
@@ -12,14 +12,19 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 
 const Home = () => {
+  const navigate = useNavigate();
+//   const {username} = route.params;
+  const handleClick = (e) => {
+    e.preventDefault();
+    navigate('/session');
+  }; 
 
   return (
     <main className="flex flex-col h-screen bg-black text-white max-w-md mx-auto relative">
       {/* Header */}
       <header className="flex justify-between items-center p-4">
         <h1 className="text-xl">
-          <span className="text-white">Welcome, </span>
-          <span className="text-[#00F7FF]">[User]</span>
+          <span className="text-white">Welcome, Sasha!</span>
         </h1>
         <div className="flex gap-4">
           <Clock className="w-6 h-6 text-white" />
@@ -38,7 +43,7 @@ const Home = () => {
             <br />
             Goals
           </h2>
-          <button className="bg-white text-black rounded-full px-6 py-2 text-sm font-medium">Begin Exercise</button>
+          <button onClick={handleClick} className="bg-white text-black rounded-full px-6 py-2 text-sm font-medium hover:bg-gray-800 transition-shadow">Begin Exercise</button>
         </div>
 
         {/* Previous Session */}

@@ -12,7 +12,7 @@ app.secret_key = b'5015fbe01ff54e249e7416f4feb0cf9d'
 cors = CORS(app, origins='*') 
 
 create_table()
-add_user("sasha","s")
+add_user("aleksshif", "hi")
 
 # @app.route("/", methods=["GET"])
 # def home(): 
@@ -116,3 +116,7 @@ def activity():
 if __name__ == "__main__":
     app.run(debug=True)
 # @app.route('/api/v1/hello', methods=['GET'])
+
+@app.route('/session', methods=['GET'])
+def session():
+    return jsonify({"status": "success", "message": "Session is active"})

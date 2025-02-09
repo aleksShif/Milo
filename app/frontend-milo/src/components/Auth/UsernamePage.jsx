@@ -1,18 +1,23 @@
-
-
 import React, { useState } from 'react';
+
 
 import { useNavigate } from 'react-router-dom';
 import { Home, Activity, Calendar, Dumbbell } from 'lucide-react';
 
 const UsernamePage = () => {
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState(''); 
   const [loading, setLoading] = useState(false);
   const [activeTab, setActiveTab] = useState('home');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+    navigate('/home');
+  };
+
+  
     navigate('/home');
   };
 
@@ -53,6 +58,20 @@ const UsernamePage = () => {
             </div>
           </div>
 
+          <div className="mb-6">
+            <label className="block text-cyan-400 mb-2">Password</label>
+            <div className="relative">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter password"
+                className="w-full bg-gray-800 rounded-lg p-3 pr-10 text-white"
+                required
+              />
+            </div>
+          </div>
+
           <button
             type="submit"
             disabled={loading}
@@ -74,7 +93,7 @@ const UsernamePage = () => {
         </div>
 
         {/* Social Login Buttons */}
-        <div className="flex justify-center space-x-4 mb-8">
+        {/* <div className="flex justify-center space-x-4 mb-8">
           <button className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
             <img src="/google-icon.png" alt="Google" className="w-6 h-6" />
           </button>
@@ -84,7 +103,7 @@ const UsernamePage = () => {
           <button className="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-700 transition-colors">
             <img src="/facebook-icon.png" alt="Facebook" className="w-6 h-6" />
           </button>
-        </div>
+        </div> */}
       </div>
 
       {/* Bottom Navigation Bar */}

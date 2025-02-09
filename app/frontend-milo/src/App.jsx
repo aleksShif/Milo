@@ -6,10 +6,12 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css';
-import UsernamePage from './components/Auth/UsernamePage';
-import PasswordPage from './components/Auth/PasswordPage';
+import './App.css'
+import UsernamePage from './components/Auth/UsernamePage'
+import PasswordPage from './components/Auth/PasswordPage'
 import Home from './components/Home/Home';
+import Session from './components/Home/Session';
+
 import Activity from './components/Home/Activity';
 const App = () => {
   return (
@@ -17,7 +19,6 @@ const App = () => {
       <Routes>
         <Route path="/loginpass" element={<PasswordPage />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/home/activity" element={<Activity />} />
         <Route path="/" element={<UsernamePage/>} />
       </Routes>
     </Router>
