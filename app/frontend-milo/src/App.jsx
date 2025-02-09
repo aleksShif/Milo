@@ -15,13 +15,15 @@ import Tracking from './components/Home/Tracking';
 import Workout from './components/Features/Workout';
 import Calendar from './components/Features/Calendar';
 
+import Activity from './components/Home/Activity';
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/loginpass" element={<PasswordPage />} />
+        <Route path="/session" element={<Session />} />
         <Route path="/home" element={<HomePage />} />
-        <Route path='/session' element={<Session />} />
+        <Route path="/home/Activity" element={<Activity />} />
         <Route path='/tracking' element={<Tracking />} />
         <Route path='/workout' element={<Workout />} />
         <Route path='/calendar' element={<Calendar />} />
