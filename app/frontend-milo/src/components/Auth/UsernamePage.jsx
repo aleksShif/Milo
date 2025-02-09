@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 
 
 import { useNavigate } from 'react-router-dom';
-import { Home, Activity, Calendar, Dumbbell } from 'lucide-react';
+import { Home, Activity, Calendar, Dumbbell, ChevronRight, Bell, Grid, Settings } from 'lucide-react';
+import '../Nav.css'
 
 const UsernamePage = () => {
   const [username, setUsername] = useState('');
@@ -12,31 +13,41 @@ const UsernamePage = () => {
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
-  const handleSubmit = (e) => {
     e.preventDefault();
     navigate('/home');
   };
 
-  
+  const goWorkout = (e) => {
+    e.preventDefault();
+    navigate('/workout');
+  };
+  const goHome = (e) => {
+    e.preventDefault();
     navigate('/home');
   };
+ 
+  const goActivities = (e) => {
+    e.preventDefault();
+    navigate('/activities');
+  };
 
-  
+  const goCalendar = (e) => {
+    e.preventDefault();
+    navigate('/calendar');
+  };
+
+
 
   return (
-    <div className="flex flex-col h-screen bg-black text-white">
+    <div className="max-w-[390px] w-[390px] mx-auto bg-black text-white min-h-screen relative rounded-3xl">
+      {/* <div className="w-full max-w-md flex flex-col flex-1"> */}
       {/* Status Bar */}
-      <div className="h-10 flex items-center px-4">
-        <span className="text-sm">9:41</span>
-      </div>
-
-      {/* Back Button */}
-      <div className="px-4 mb-4">
-        <button className="text-cyan-400">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M19 12H5M5 12L12 19M5 12L12 5" />
-          </svg>
-        </button>
+      <div className="flex justify-between items-center p-4">
+        <span>9:41</span>
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 bg-white rounded-full"></div>
+          <div className="w-4 h-4 bg-white rounded-full"></div>
+        </div>
       </div>
 
       {/* Main Content */}
@@ -105,41 +116,31 @@ const UsernamePage = () => {
           </button>
         </div> */}
       </div>
-
       {/* Bottom Navigation Bar */}
-      <div className="bg-pink-500 mt-auto">
-        <div className="flex justify-around py-4">
-          <button 
-            onClick={() => setActiveTab('home')}
-            className={`flex flex-col items-center transition-colors ${activeTab === 'home' ? 'text-white' : 'text-pink-200 hover:text-white'}`}
-          >
-            <Home className="w-6 h-6" />
-            <span className="text-xs mt-1">Home</span>
-          </button>
-          <button 
-            onClick={() => setActiveTab('activity')}
-            className={`flex flex-col items-center transition-colors ${activeTab === 'activity' ? 'text-pink-200 hover:text-white' : 'text-pink-200 hover:text-white'}`}
-          >
-            <Activity className="w-6 h-6" />
-            <span className="text-xs mt-1">Activity</span>
-          </button>
-          <button 
-            onClick={() => setActiveTab('calendar')}
-            className={`flex flex-col items-center transition-colors ${activeTab === 'calendar' ? 'text-white' : 'text-pink-200 hover:text-white'}`}
-          >
-            <Calendar className="w-6 h-6" />
-            <span className="text-xs mt-1">Calendar</span>
-          </button>
-          <button 
-            onClick={() => setActiveTab('workouts')}
-            className={`flex flex-col items-center transition-colors ${activeTab === 'workouts' ? 'text-white' : 'text-pink-200 hover:text-white'}`}
-          >
-            <Dumbbell className="w-6 h-6" />
-            <span className="text-xs mt-1">Workouts</span>
-          </button>
-        </div>
+      <div 
+        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[390px] 
+        bg-gray-900/90 backdrop-blur-md border-t border-gray-800 
+        flex justify-around items-center py-2 px-2 h-16 space-x-4"
+      >
+        <button onClick={goHome} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Home className="w-6 h-6" />
+          <span className="text-xs mt-1">Home</span>
+        </button>
+        <button onClick={goActivities} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Activity className="w-6 h-6" />
+          <span className="text-xs mt-1">Activity</span>
+        </button>
+        <button onClick={goCalendar} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Grid className="w-6 h-6" />
+          <span className="text-xs mt-1">Calendar</span>
+        </button>
+        <button onClick={goWorkout} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Settings className="w-6 h-6" />
+          <span className="text-xs mt-1">Workouts</span>
+        </button>
       </div>
-    </div>
+      </div>
+    // </div>
   );
 };
 

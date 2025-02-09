@@ -1,6 +1,7 @@
 import React from 'react'
-import { Settings, Clock, ChevronRight } from "lucide-react"
+import { Settings, Clock, ChevronRight, Activity, Grid, Home} from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
+import '../Nav.css'
 
 
 
@@ -11,16 +12,34 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; 
 
-const Home = () => {
+const HomePage = () => {
   const navigate = useNavigate();
 //   const {username} = route.params;
   const handleClick = (e) => {
     e.preventDefault();
     navigate('/session');
   }; 
+  const goWorkout = (e) => {
+    e.preventDefault();
+    navigate('/workout');
+  };
+  const goHome = (e) => {
+    e.preventDefault();
+    navigate('/home');
+  };
+ 
+  const goActivities = (e) => {
+    e.preventDefault();
+    navigate('/activities');
+  };
+
+  const goCalendar = (e) => {
+    e.preventDefault();
+    navigate('/calendar');
+  };
 
   return (
-    <main className="flex flex-col h-screen bg-black text-white max-w-md mx-auto relative">
+    <main className="max-w-[390px] w-[390px] mx-auto bg-black text-white min-h-screen relative rounded-3xl">
       {/* Header */}
       <header className="flex justify-between items-center p-4">
         <h1 className="text-xl">
@@ -105,26 +124,28 @@ const Home = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <nav className="fixed bottom-0 w-full bg-[#121212] px-6 py-4 max-w-md">
-        <div className="flex justify-between items-center">
-          <Link href="#" className="flex flex-col items-center">
-            <div className="w-8 h-8 rounded-full bg-[#00F7FF] mb-1"></div>
-            <span className="text-[#00F7FF] text-xs">Home</span>
-          </Link>
-          <Link href="#" className="flex flex-col items-center">
-            <div className="w-8 h-8 rounded-full bg-zinc-800 mb-1"></div>
-            <span className="text-zinc-400 text-xs">Activity</span>
-          </Link>
-          <Link href="#" className="flex flex-col items-center">
-            <div className="w-8 h-8 rounded-full bg-[#FF3D9A] mb-1"></div>
-            <span className="text-[#FF3D9A] text-xs">Calendar</span>
-          </Link>
-          <Link href="#" className="flex flex-col items-center">
-            <div className="w-8 h-8 rounded-full bg-zinc-800 mb-1"></div>
-            <span className="text-zinc-400 text-xs">Workouts</span>
-          </Link>
-        </div>
-      </nav>
+      <div 
+        className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[390px] 
+        bg-gray-900/90 backdrop-blur-md border-t border-gray-800 
+        flex justify-around items-center py-2 px-2 h-16 space-x-4"
+      >
+        <button onClick={goHome} className="text-pink-500 flex flex-col items-center justify-center flex-1">
+          <Home className="w-6 h-6" />
+          <span className="text-xs mt-1">Home</span>
+        </button>
+        <button onClick={goActivities} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Activity className="w-6 h-6" />
+          <span className="text-xs mt-1">Activity</span>
+        </button>
+        <button onClick={goCalendar} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Grid className="w-6 h-6" />
+          <span className="text-xs mt-1">Calendar</span>
+        </button>
+        <button onClick={goWorkout} className="hover-bar-button text-gray-500 flex flex-col items-center justify-center flex-1">
+          <Settings className="w-6 h-6" />
+          <span className="text-xs mt-1">Workouts</span>
+        </button>
+      </div>
     </main>
   )
   };
@@ -170,4 +191,4 @@ const Home = () => {
 //   )
 // }
 
-export default Home
+export default HomePage

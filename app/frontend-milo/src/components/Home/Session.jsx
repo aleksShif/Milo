@@ -8,9 +8,13 @@ const ExerciseSession = () => {
     e.preventDefault();
     navigate('../home');
   }
+  const handleStartClick = (e) => {
+    e.preventDefault();
+    navigate('/tracking');
+  }
 
   return (
-    <div className="min-h-screen bg-black text-white p-4 max-w-md mx-auto">
+    <div className="max-w-[390px] w-[390px] mx-auto bg-black text-white min-h-screen relative rounded-3xl">
       {/* Header */}
       <div className="flex items-center gap-3 mb-6">
         <button onClick={handleClick} className="text-cyan-400 p-2 rounded-full hover:bg-gray-800">
@@ -64,7 +68,7 @@ const ExerciseSession = () => {
       </div>
 
       {/* Start Button */}
-      <button className="w-full bg-pink-500 hover:bg-pink-600 text-white py-6 text-lg font-medium rounded-xl">
+      <button onClick={handleStartClick}  className="w-full bg-pink-500 hover:bg-pink-600 text-white py-6 text-lg font-medium rounded-xl">
         Start Tracking
       </button>
     </div>

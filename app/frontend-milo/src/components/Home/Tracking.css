@@ -1,0 +1,8 @@
+.end-tracking-button {
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .end-tracking-button:hover {
+    background-color: #ff4d4d; /* Lighter red color */
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.8); /* Glowing effect */
+  }
