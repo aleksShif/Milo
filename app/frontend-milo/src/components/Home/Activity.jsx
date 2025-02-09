@@ -11,12 +11,16 @@ const ActivityDashboard = () => {
     const [right, setRight] = useState('dataMax');
     const [refAreaLeft, setRefAreaLeft] = useState('');
     const [refAreaRight, setRefAreaRight] = useState('');
+    const [insight, setInsight] = useState("Analyzing your workout data...");
+
+    const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+    const baseUrl = import.meta.env.VITE_OPENAI_BASE_URL;
 
     //parse CSV emg data
     useEffect(() => {
         const parseCSV = async () => {
             try {
-                const response = await fetch('/activity-log-01-01-2025.csv');
+                const response = await fetch('/activity-log-01-03-2025.csv');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -41,6 +45,59 @@ const ActivityDashboard = () => {
 
         parseCSV();
     }, []);
+
+    const generateInsight = async () => {
+        try {
+            if (!baseUrl) {
+                throw new Error('API base URL is not defined');
+            }
+
+            const csvString = Papa.unparse(data);
+
+            const response = await fetch(`${baseUrl}/v1/chat/completions`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify({
+                    model: "anthropic.claude-3.5-sonnet.v2",
+                    messages: [
+                    {
+                        role: "system",
+                        content: "You are Milo, an AI fitness coach analyzing workout data. Your client is a female weightlifter who is performing bicep curls with EMG sensors attached that read muscle activation levels. Provide insight such as peak EMG activation, muscle fatigue, average rep duration, and more. Your goal is to be encouraging to the client and provide bite-sized pieces of information , 3-5 bullet points, to help them improve their workout. Be concise and use emojis to add emotion and color. Please add new lines after each piece of information to allow it to fit on a mobile screen."
+                    },
+                    {
+                        role: "user",
+                        content: "Can you analyze this data?" + csvString
+                    }],
+                    temperature: 0.7,
+                    max_tokens: 500
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const result = await response.json();
+
+            if (!result.choices || !result.choices[0]?.message?.content) {
+                throw new Error('Invalid response format from API');
+            }
+
+            setInsight(result.choices[0].message.content);
+        } catch (error) {
+            console.error('Error generating insight:', error);
+            setInsight("Unable to generate insight at this time.");
+        }
+    };
+
+    useEffect(() => {
+        if (data.length > 0) {
+            generateInsight();
+        }
+    }, [data]);
 
     //zoom in on highlighted portion of chart
     const zoom = () => {
@@ -73,7 +130,7 @@ const ActivityDashboard = () => {
         const timestamps = data.map(item => parseFloat(item.timestamp));
         const minTimestamp = Math.min(...timestamps);
         const maxTimestamp = Math.max(...timestamps);
-        
+
         setLeft(minTimestamp);
         setRight(maxTimestamp);
         setRefAreaLeft('');
@@ -111,6 +168,7 @@ const ActivityDashboard = () => {
             </header>
 
             {/* Main Content */}
+            <div className="flex-1 overflow-y-auto pb-24 px-4">
             <div className="rounded-2xl bg-[#121212] p-4 mb-4">
                 {/* Force Output Chart */}
                 <div className="flex justify-between items-center mb-2">
@@ -172,7 +230,7 @@ const ActivityDashboard = () => {
                     </LineChart>
                 </ResponsiveContainer>
             </div>
-
+            
 
             {/* Pulse Rate Chart */}
             <div className="rounded-2xl bg-[#121212] p-4">
@@ -236,6 +294,14 @@ const ActivityDashboard = () => {
                 </ResponsiveContainer>
             </div>
 
+            <div className="rounded-2xl bg-[#121212] p-4 mt-4">
+                <h2 className="text-[#00F7FF] text-lg mb-3">Milo's Insight</h2>
+                <div className="text-gray-300 bg-[#1A1A1A] p-4 rounded-lg">
+                        {insight}
+                </div>
+            </div>
+            </div>
+
             {/* Bottom Navigation */}
             <nav className="fixed bottom-0 w-full bg-[#121212] px-6 py-4 max-w-md">
                 <div className="flex justify-between items-center">
@@ -244,8 +310,8 @@ const ActivityDashboard = () => {
                         <span className="text-zinc-400 text-xs">Home</span>
                     </Link>
                     <Link to="/activity" className="flex flex-col items-center">
-                        <div className="w-8 h-8 rounded-full bg-[#FF3D9A] mb-1"></div>
-                        <span className="text-[#FF3D9A] text-xs">Activity</span>
+                        <div className="w-8 h-8 rounded-full bg-[#00F7FF] mb-1"></div>
+                        <span className="text-[#00F7FF] text-xs">Activity</span>
                     </Link>
                     <Link to="/calendar" className="flex flex-col items-center">
                         <div className="w-8 h-8 rounded-full bg-zinc-800 mb-1"></div>
@@ -257,7 +323,7 @@ const ActivityDashboard = () => {
                     </Link>
                 </div>
             </nav>
-        </main >
+        </main>
     );
 };
 
