@@ -28,7 +28,7 @@ const UsernamePage = () => {
  
   const goActivities = (e) => {
     e.preventDefault();
-    navigate('/activities');
+    navigate('/home/activity');
   };
 
   const goCalendar = (e) => {
