@@ -106,6 +106,13 @@ def register():
         conn.close()
         return jsonify({"status": "error", "message": "User already exists"})
 
+@app.route("/home/activity", methods=["GET"])
+def activity():
+    # Example response, you can customize this as needed
+    return jsonify({
+        "activity": "This is the activity page."
+    })
+
 if __name__ == "__main__":
     app.run(debug=True)
 # @app.route('/api/v1/hello', methods=['GET'])

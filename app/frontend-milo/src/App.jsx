@@ -10,12 +10,14 @@ import './App.css';
 import UsernamePage from './components/Auth/UsernamePage';
 import PasswordPage from './components/Auth/PasswordPage';
 import Home from './components/Home/Home';
+import Activity from './components/Home/Activity';
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/loginpass" element={<PasswordPage />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/home/activity" element={<Activity />} />
         <Route path="/" element={<UsernamePage/>} />
       </Routes>
     </Router>
