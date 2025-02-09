@@ -9,6 +9,8 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import UsernamePage from './components/Auth/UsernamePage'
 import PasswordPage from './components/Auth/PasswordPage'
+import Home from './components/Home/Home';
+import Session from './components/Home/Session';
 
 const App = () => {
   return (
@@ -16,7 +18,9 @@ const App = () => {
       <Routes>
         <Route path="/login" element={<UsernamePage />} />
         <Route path="/loginpass" element={<PasswordPage />} />
-        <Route path="/" element={<Navigate to="/login" replace />} />
+        <Route path="/home" element={<Home />} />
+        <Route path='/session' element={<Session />} />
+        <Route path="/" element={<UsernamePage/>} />
       </Routes>
     </Router>
   )
